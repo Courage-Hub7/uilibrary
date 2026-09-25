@@ -731,9 +731,9 @@ function Library:CreateWindow(Config)
             LayoutOrder = 2,
             BorderSizePixel = 0,
             TextSize = 12,
-            BackgroundColor3 = Theme.Accent,
+            BackgroundTransparency = 1,
             FontFace = InterSemiBold,
-            TextColor3 = Color3.fromRGB(255, 255, 255),
+            TextColor3 = Color3.fromRGB(216, 180, 254),
             Size = UDim2.new(0, 0, 0, 14),
             AutomaticSize = Enum.AutomaticSize.X,
             Text = Config.GameName,
@@ -742,6 +742,7 @@ function Library:CreateWindow(Config)
         Create("UIPadding", { PaddingRight = UDim.new(0, 4), PaddingLeft = UDim.new(0, 4), Parent = GameName })
         RegisterAccent(function()
             GameName.BackgroundColor3 = Theme.AccentText
+            GameName.BackgroundTransparency = 1
         end)
     end
 
