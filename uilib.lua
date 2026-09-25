@@ -765,8 +765,7 @@ function Library:CreateWindow(Config)
         return Badge
     end
 
-    AddBadge(Config.Version or "v0.0.0", 3)
-    local ExecBadge = AddBadge("0 executions", 4)
+    AddBadge(Config.Version or "v1.0.0", 3)
 
     local function MakeTopButton(Image, Width, RightOffset)
         return Create("ImageButton", {
@@ -960,7 +959,6 @@ function Library:CreateWindow(Config)
     end
 
     pcall(function()
-        Self:SetExecutions(0)
     end)
 
     Library.Window = Self
@@ -998,10 +996,6 @@ function Window:SetMinimized(State)
             self.Main.ClipsDescendants = false
         end)
     end
-end
-
-function Window:SetExecutions(Count)
-    self.ExecBadge.Text = tostring(Count) .. " executions"
 end
 
 function Window:Unload()
