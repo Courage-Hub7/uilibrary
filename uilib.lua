@@ -619,11 +619,11 @@ end
 function Library:CreateWindow(Config)
     Config = Config or {}
 
-    if getgenv()._TateWindow then
+    if getgenv()._HubWindow then
         pcall(function()
-            getgenv()._TateWindow:Unload()
+            getgenv()._HubWindow:Unload()
         end)
-        getgenv()._TateWindow = nil
+        getgenv()._HubWindow = nil
     end
 
     if not Config.GameName then
@@ -633,7 +633,7 @@ function Library:CreateWindow(Config)
     end
 
     local Screen = Create("ScreenGui", {
-        Name = "TateUI",
+        Name = "HubUI",
         ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
         ResetOnSpawn = false,
         IgnoreGuiInset = true,
@@ -657,7 +657,7 @@ function Library:CreateWindow(Config)
         RegisterFadesEnabled = false
         local DragSrc = Settings.DragImage
         if type(DragSrc) == "string" and DragSrc:match("^https?://") then
-            local DragFile = "TateHub/drag_image.png"
+            local DragFile = "Hub/drag_image.png"
             pcall(function()
                 if not isfile(DragFile) then
                     writefile(DragFile, game:HttpGet(DragSrc))
@@ -724,7 +724,7 @@ function Library:CreateWindow(Config)
         TextColor3 = Color3.fromRGB(255, 255, 255),
         Size = UDim2.new(0, 0, 1, 0),
         AutomaticSize = Enum.AutomaticSize.X,
-        Text = Config.Title or "TATE",
+        Text = Config.Title or "",
     })
     Create("UIPadding", { PaddingLeft = UDim.new(0, 10), Parent = TitleLabel })
 
@@ -912,8 +912,8 @@ function Library:CreateWindow(Config)
 
     Self.ToggleKey = Config.ToggleKey or Enum.KeyCode.RightShift
     pcall(function()
-        if isfile("TateHub/MenuKey.txt") then
-            local Saved = Enum.KeyCode[readfile("TateHub/MenuKey.txt")]
+        if isfile("Hub/MenuKey.txt") then
+            local Saved = Enum.KeyCode[readfile("Hub/MenuKey.txt")]
             if Saved then
                 Self.ToggleKey = Saved
             end
@@ -967,7 +967,7 @@ function Library:CreateWindow(Config)
     end)
 
     Library.Window = Self
-    getgenv()._TateWindow = Self
+    getgenv()._HubWindow = Self
     return Self
 end
 
@@ -1028,8 +1028,8 @@ function Window:Unload()
         pcall(function() TooltipGui:Destroy() end)
         TooltipGui = nil
     end
-    if getgenv()._TateWindow == self then
-        getgenv()._TateWindow = nil
+    if getgenv()._HubWindow == self then
+        getgenv()._HubWindow = nil
     end
     if self.Screen then
         self.Screen:Destroy()
@@ -2914,8 +2914,8 @@ function Library:SetAccent(Color)
 end
 
 function Library:CreateSettingsTab(Window)
-    local ConfigFolder = "TateHub/Configs"
-    local AutoloadPath = "TateHub/Autoload.txt"
+    local ConfigFolder = "Hub/Configs"
+    local AutoloadPath = "Hub/Autoload.txt"
     pcall(function()
         if not isfolder(ConfigFolder) then
             makefolder(ConfigFolder)
@@ -3059,14 +3059,14 @@ function Library:CreateSettingsTab(Window)
     }
 
     local ThemeBox = Tab:AddGroupbox("Theme")
-    local AccentPicker = ThemeBox:AddColorPicker("TateAccent", {
+    local AccentPicker = ThemeBox:AddColorPicker("AccentPicker", {
         Text = "Accent Color",
         Default = Theme.Accent,
         Callback = function(Color)
             Library:SetAccent(Color)
         end,
     })
-    local CursorPicker = ThemeBox:AddColorPicker("TateCursor", {
+    local CursorPicker = ThemeBox:AddColorPicker("CursorPicker", {
         Text = "Cursor Color",
         Default = Settings.CursorColor,
         Callback = function(Color)
@@ -3076,7 +3076,7 @@ function Library:CreateSettingsTab(Window)
             end
         end,
     })
-    ThemeBox:AddDropdown("_TatePremade", {
+    ThemeBox:AddDropdown("_PremadeThemes", {
         Text = "Premade Themes",
         Values = PremadeOrder,
         Callback = function(Value)
@@ -3106,15 +3106,15 @@ function Library:CreateSettingsTab(Window)
             MenuListening = false
             Window.ToggleKey = Input.KeyCode
             pcall(function()
-                writefile("TateHub/MenuKey.txt", Input.KeyCode.Name)
+                writefile("Hub/MenuKey.txt", Input.KeyCode.Name)
             end)
             MenuKeyButton:SetText("Show / Hide Key: " .. Input.KeyCode.Name)
         end
     end)
 
     local ConfigBox = Tab:AddGroupbox("Configs")
-    local NameInput = ConfigBox:AddInput("_TateConfigName", { Text = "Config Name", Placeholder = "MyConfig" })
-    local ConfigList = ConfigBox:AddDropdown("_TateConfigList", { Text = "Saved Configs", Values = ListConfigs() })
+    local NameInput = ConfigBox:AddInput("_ConfigName", { Text = "Config Name", Placeholder = "MyConfig" })
+    local ConfigList = ConfigBox:AddDropdown("_ConfigList", { Text = "Saved Configs", Values = ListConfigs() })
 
     ConfigBox:AddButton({ Text = "Create / Save", Func = function()
         if SaveConfig(NameInput.Value) then
@@ -3178,7 +3178,7 @@ function Library:CreateSettingsTab(Window)
     return Tab
 end
 
--- Tate Hub ownership marker: only OUR hosted build passes validation
-Library.TateOwned = "tatehub-v1"
+-- ownership flag: only OUR hosted build passes validation
+Library.OwnedBuild = true
 
 return Library
