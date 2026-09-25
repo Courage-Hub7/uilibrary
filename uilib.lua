@@ -11,8 +11,6 @@ local MarketplaceService = game:GetService("MarketplaceService")
 local LocalPlayer = Players.LocalPlayer
 local IsMobile = UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled
 
-
-
 local AccentTargets = {}
 local function RegisterAccent(Updater)
     table.insert(AccentTargets, Updater)
@@ -30,54 +28,54 @@ Library.Connections = {}
 Library.Popups = {}
 
 local Theme = {
-    Background = Color3.fromRGB(12, 12, 16),
-    Panel = Color3.fromRGB(19, 19, 25),
-    Stroke = Color3.fromRGB(34, 35, 43),
-    Accent = Color3.fromRGB(18, 18, 24),
-    AccentHover = Color3.fromRGB(28, 28, 36),
-    AccentClick = Color3.fromRGB(36, 36, 44),
-    AccentText = Color3.fromRGB(200, 200, 210),
-    ElementBackground = Color3.fromRGB(12, 12, 16),
-    ElementStroke = Color3.fromRGB(31, 31, 39),
-    Title = Color3.fromRGB(175, 175, 177),
-    Text = Color3.fromRGB(118, 118, 127),
-    SubText = Color3.fromRGB(101, 101, 114),
-    GroupboxTitle = Color3.fromRGB(115, 115, 130),
-    CategoryTitle = Color3.fromRGB(163, 163, 173),
-    TabSelected = Color3.fromRGB(206, 206, 206),
-    TabUnselected = Color3.fromRGB(93, 93, 105),
-    SliderTrack = Color3.fromRGB(19, 19, 25),
-    SliderStroke = Color3.fromRGB(31, 32, 40),
-    SliderFill = Color3.fromRGB(220, 220, 230),
-    Line = Color3.fromRGB(31, 32, 40),
-    ButtonStroke = Color3.fromRGB(36, 47, 66),
-    OutlineButton = Color3.fromRGB(19, 19, 25),
-    OutlineButtonHover = Color3.fromRGB(29, 29, 39),
-    OutlineButtonClick = Color3.fromRGB(37, 37, 47),
-    OutlineButtonStroke = Color3.fromRGB(33, 33, 39),
-    TableHeader = Color3.fromRGB(12, 12, 16),
-    TableRow = Color3.fromRGB(19, 19, 25),
-    TableStroke = Color3.fromRGB(33, 34, 42),
-    TableText = Color3.fromRGB(109, 109, 117),
-    TableTitle = Color3.fromRGB(156, 156, 166),
-    DimText = Color3.fromRGB(116, 116, 131),
-    CogClosed = Color3.fromRGB(108, 108, 122),
-    CogOpen = Color3.fromRGB(164, 164, 186),
-    DropdownArrow = Color3.fromRGB(126, 126, 128),
-    DropdownBlank = Color3.fromRGB(112, 112, 120),
-    KeybindMenuText = Color3.fromRGB(137, 137, 137),
-    KeybindModeOn = Color3.fromRGB(0, 111, 231),
-    KeybindModeOff = Color3.fromRGB(19, 19, 19),
-    TextboxStroke = Color3.fromRGB(33, 34, 40),
-    TextboxText = Color3.fromRGB(130, 130, 131),
-    ButtonDefault = Color3.fromRGB(22, 22, 28),
-    ButtonDefaultHover = Color3.fromRGB(32, 32, 40),
-    ButtonDefaultStroke = Color3.fromRGB(36, 36, 46),
-    ElementBorder = Color3.fromRGB(32, 32, 40),
-    TooltipBackground = Color3.fromRGB(22, 22, 28),
-    TooltipBorder = Color3.fromRGB(44, 44, 56),
-    TooltipTitle = Color3.fromRGB(235, 235, 240),
-    TooltipDesc = Color3.fromRGB(155, 155, 168),
+    Background = Color3.fromRGB(16, 10, 28),
+    Panel = Color3.fromRGB(24, 14, 40),
+    Stroke = Color3.fromRGB(64, 38, 105),
+    Accent = Color3.fromRGB(168, 85, 247),
+    AccentHover = Color3.fromRGB(192, 132, 252),
+    AccentClick = Color3.fromRGB(217, 70, 239),
+    AccentText = Color3.fromRGB(240, 225, 255),
+    ElementBackground = Color3.fromRGB(26, 16, 44),
+    ElementStroke = Color3.fromRGB(78, 48, 125),
+    Title = Color3.fromRGB(216, 180, 254),
+    Text = Color3.fromRGB(196, 181, 253),
+    SubText = Color3.fromRGB(167, 139, 250),
+    GroupboxTitle = Color3.fromRGB(216, 180, 254),
+    CategoryTitle = Color3.fromRGB(232, 121, 249),
+    TabSelected = Color3.fromRGB(217, 70, 239),
+    TabUnselected = Color3.fromRGB(126, 94, 173),
+    SliderTrack = Color3.fromRGB(38, 22, 62),
+    SliderStroke = Color3.fromRGB(90, 52, 148),
+    SliderFill = Color3.fromRGB(192, 132, 252),
+    Line = Color3.fromRGB(64, 38, 105),
+    ButtonStroke = Color3.fromRGB(126, 58, 173),
+    OutlineButton = Color3.fromRGB(32, 18, 54),
+    OutlineButtonHover = Color3.fromRGB(58, 32, 96),
+    OutlineButtonClick = Color3.fromRGB(88, 44, 140),
+    OutlineButtonStroke = Color3.fromRGB(90, 52, 148),
+    TableHeader = Color3.fromRGB(24, 14, 40),
+    TableRow = Color3.fromRGB(30, 18, 50),
+    TableStroke = Color3.fromRGB(64, 38, 105),
+    TableText = Color3.fromRGB(196, 181, 253),
+    TableTitle = Color3.fromRGB(216, 180, 254),
+    DimText = Color3.fromRGB(147, 122, 190),
+    CogClosed = Color3.fromRGB(150, 120, 200),
+    CogOpen = Color3.fromRGB(216, 180, 254),
+    DropdownArrow = Color3.fromRGB(192, 132, 252),
+    DropdownBlank = Color3.fromRGB(147, 122, 190),
+    KeybindMenuText = Color3.fromRGB(196, 181, 253),
+    KeybindModeOn = Color3.fromRGB(168, 85, 247),
+    KeybindModeOff = Color3.fromRGB(30, 18, 50),
+    TextboxStroke = Color3.fromRGB(90, 52, 148),
+    TextboxText = Color3.fromRGB(232, 225, 250),
+    ButtonDefault = Color3.fromRGB(36, 20, 62),
+    ButtonDefaultHover = Color3.fromRGB(58, 32, 96),
+    ButtonDefaultStroke = Color3.fromRGB(90, 52, 148),
+    ElementBorder = Color3.fromRGB(78, 48, 125),
+    TooltipBackground = Color3.fromRGB(30, 18, 52),
+    TooltipBorder = Color3.fromRGB(90, 52, 148),
+    TooltipTitle = Color3.fromRGB(240, 225, 255),
+    TooltipDesc = Color3.fromRGB(196, 181, 253),
 }
 
 Library.Theme = Theme
@@ -96,7 +94,7 @@ local Settings = {
     KeybindMenuOffset = Vector2.new(170, 70),
     DropdownMenuOffset = Vector2.new(0, 65),
     DragFadeTransparency = 0.3,
-    DragImage = false, -- no third-party image defaults; the hub supplies its own
+    DragImage = false,
     DragImageSize = UDim2.fromScale(0.9, 0.85),
     DragImageRotation = -25,
     CursorEnabled = true,
@@ -161,8 +159,6 @@ local function Create(ClassName, Properties, Children)
     return Object
 end
 
--- custom-font download removed: the original build pulled a TTF from
--- the author's GitHub. We ship no remote fonts; built-in only.
 local InterSemiBold = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.SemiBold)
 
 Library.Font = InterSemiBold
@@ -189,7 +185,7 @@ local function SafeCall(Callback, ...)
     end
     local Ok, Err = pcall(Callback, ...)
     if not Ok then
-        warn("[EthosLibrary] Callback error: " .. tostring(Err))
+        warn("[UiLibrary] Callback error: " .. tostring(Err))
     end
 end
 
@@ -735,9 +731,9 @@ function Library:CreateWindow(Config)
             LayoutOrder = 2,
             BorderSizePixel = 0,
             TextSize = 12,
-            BackgroundColor3 = Theme.AccentText,
+            BackgroundColor3 = Theme.Accent,
             FontFace = InterSemiBold,
-            TextColor3 = Color3.fromRGB(12, 12, 16),
+            TextColor3 = Color3.fromRGB(255, 255, 255),
             Size = UDim2.new(0, 0, 0, 14),
             AutomaticSize = Enum.AutomaticSize.X,
             Text = Config.GameName,
@@ -2757,7 +2753,7 @@ function Library:Notify(Options)
 
     if not NotifyHolder then
         local Screen = Create("ScreenGui", {
-            Name = "EthosNotifications",
+            Name = "HubNotifications",
             ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
             ResetOnSpawn = false,
             IgnoreGuiInset = true,
@@ -3178,7 +3174,6 @@ function Library:CreateSettingsTab(Window)
     return Tab
 end
 
--- ownership flag: only OUR hosted build passes validation
 Library.OwnedBuild = true
 
 return Library
